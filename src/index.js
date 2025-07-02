@@ -5,6 +5,8 @@ import reportWebVitals from "./reportWebVitals";
 
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
+import { Elements } from "@stripe/react-stripe-js";
+import { stripePromise } from "./utills/stripe/stripe.utills";
 
 import App from "./App";
 import "./index.scss";
@@ -18,17 +20,19 @@ import { store, persistor } from "./store/store";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Provider store={store}>
-    <PersistGate persistor={persistor} loading={null}>
+    {/* <PersistGate persistor={persistor} loading={null}> */}
       <BrowserRouter>
         {/* <UserProvider> */}
         {/* <CategoriesProvider> */}
         {/* <CartProvider> */}
-        <App />
+        <Elements stripe={stripePromise}>
+          <App />
+        </Elements>
         {/* </CartProvider> */}
         {/* </CategoriesProvider> */}
         {/* </UserProvider> */}
       </BrowserRouter>
-    </PersistGate>
+    {/* </PersistGate> */}
   </Provider>
 );
 
